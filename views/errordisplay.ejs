@@ -22,7 +22,7 @@
   </form>
 
   <h5>PLEASE ENTER VALID CREDENTIALS</h5>
-  <% if(typeof alert != 'undefined') {%>
+  <% if(typeof alerts != 'undefined') {%>
     <% alert.forEach(function(error){ %>
         <div class="errormsg" role="alert">
             <%= error.msg %>
@@ -30,7 +30,7 @@
         <% }) %>
   <% } %>
 
-  <% if (alerts === 'Valid') { %>
+  <% if (alerts === 'Duplications') { %>
     <div class="errormsg" role="alert">
       <p>Email ID Already Exist! Try Again</p>
     </div>

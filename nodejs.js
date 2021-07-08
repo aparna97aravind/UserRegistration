@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 
 //SIGN UP PAGE
 app.get("/", (req, res) => {
-  res.sendFile( __dirname + '/signuppage.html');
+  res.render('signuppage');
 });
 
 //VALIDATIONS
@@ -26,6 +26,7 @@ app.post("/signup",[
   (req,res) =>
   {
     const errors = validationResult(req);
+   // console.log(errors,"In the validator");
     if(!errors.isEmpty())
     {
       const alert = errors.array();
@@ -40,11 +41,10 @@ app.post("/signup",[
       (err)=>
       {
         if (err) count = count + 1;
-        const errors = validationResult(req);
         if (count > 0)
         {
           const alert = errors.array();
-          res.render('errordisplay', { alert, alerts: 'Valid' });
+          res.render('errordisplay', { alert, alerts: 'Duplications' });
         }
         else
         {
@@ -56,7 +56,7 @@ app.post("/signup",[
 
 //LOGIN PAGE
 app.get("/login", (req, res) => {
-  res.sendFile( __dirname + '/loginpage.html');
+  res.render('loginpage');
 })
 
 // WELCOME Page
@@ -79,4 +79,3 @@ connection.connect(function (error) {
 });
 //listening
 app.listen(8080, (req, res) => console.log("Listening to the port 8080"));
-module.exports= connection;

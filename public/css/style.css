@@ -35,3 +35,23 @@ h5{
 .next_login{
   margin-left: 600px;
 }
+h3{
+  color: darkblue;
+  text-align: center;
+  margin-top: 300px;
+}
+.loginforms h4 {
+  color: rgb(184, 39, 13);
+ }
+ .loginforms {
+   text-align: left;
+   padding-left: 500px;
+   padding-top: 180px;
+ }
+ .loginforms input {
+  margin-left: 10px;
+  margin-top: 10px;
+ }
+ .loginforms button {
+   margin-top: 35px;
+ }
