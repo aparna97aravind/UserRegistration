@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>SIGN UP</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
-</head>
-
+<%- include('ejsPartials/header.ejs') %>
 <body>
   <form action="/signup" method="POST" class="forms">
   <h4>SIGN UP</h4>
@@ -23,7 +16,7 @@
 
   <h5>PLEASE ENTER VALID CREDENTIALS</h5>
   <% if(typeof alerts != 'undefined') {%>
-    <% alert.forEach(function(error){ %>
+    <% errarray.forEach(function(error){ %>
         <div class="errormsg" role="alert">
             <%= error.msg %>
           </div>
@@ -37,4 +30,4 @@
   <% } %>
 
 </body>
-</html>
+<%- include('ejsPartials/footer.ejs') %>

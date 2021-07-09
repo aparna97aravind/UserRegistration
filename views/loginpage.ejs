@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>LOGIN</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
-</head>
+<%- include('ejsPartials/header.ejs') %>
 
 <body>
   <form action="/logindone" method="POST" class="loginforms">
@@ -19,5 +13,14 @@
     <button type="submit" name="submit">SUBMIT</button>
 
   </form>
+
+  <% if (flag === 0 ) { %>
+    <div class="errormsg" role="alert">
+      <%= message %>
+    </div>
+  <% } %>
+
 </body>
-</html>
+
+
+<%- include('ejsPartials/footer.ejs') %>
