@@ -42,21 +42,28 @@ app.post('/signup', [
   // console.log(errors,"In the validator");
   if (!errors.isEmpty()) {
     const errarray = errors.array();
-    // console.log(alert, "errors listed above");
     res.render('errordisplay', { errarray, alerts: 'Invalid' });
   } else {
     const { email, username, password } = req.body;
-    let count = 0; // count counts the error
-    connection.query('INSERT INTO CustomerList(cust_name,email,password) VALUES(?, ?, ?)', [username, email, password],
-      (err) => {
-        if (err) count += 1;
-        if (count > 0) {
+    connection.query('SELECT email FROM CustomerList WHERE email = ?', [email], // checking for similar Email id in DB
+      (err, result) => {
+        console.log(result);
+        console.log(err);
+        if (err) {
+          res.send('Something went wrong here');
+        }
+        if (result.length > 0) { // if no match found,result array will be empty
           const errarray = errors.array();
           res.render('errordisplay', { errarray, alerts: 'Duplications' });
-        } else {
-          res.render('successreg');
         }
-      });
+        connection.query('INSERT INTO CustomerList(cust_name,email,password) VALUES(?, ?, ?)', [username, email, password], (err, result) => {
+          if (err) {
+            res.send('Something went wrong');
+          } else {
+            res.render('successreg');
+          }
+        });
+      })
   }
 });
 
@@ -72,15 +79,15 @@ app.post('/logindone', (req, res) => {
   connection.query('SELECT email,password FROM CustomerList WHERE email=?', [email], (err, output) => {
     if (err) {
       res.send('Something went wrong,try after sometime');
-    }
-    if (output.length === 0) { // empty array
-      res.render('loginpage', { flag: 0, message: 'User doesnot exist! Try another Email ID or Sign Up' });
-      // console.log('User doesnot exist! Try another Email ID or Sign Up');
-    }
-    if (output[0].password === req.body.password) { // password matches
-      res.render('done');
     } else {
-      res.render('loginpage', { flag: 0, message: 'Incorrect Password' });
+      if (output.length === 0) { // empty array
+        res.render('loginpage', { flag: 0, message: 'User doesnot exist! Try another Email ID or Sign Up' });
+      }
+      if (output[0].password === req.body.password) { // password matches
+        res.render('done');
+      } else {
+        res.render('loginpage', { flag: 0, message: 'Incorrect Password' });
+      }
     }
   });
 });

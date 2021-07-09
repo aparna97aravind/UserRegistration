@@ -61,6 +61,14 @@ h3{
 .loginforms .errormsg{
   font-size: 13px;
   color: brown;
+  text-align: center;
+}
+.signup p{
+  text-align: center;
+  font-size: 15px;
+  color: green;
   font-weight: 800;
-  text-align: left;
+}
+.signup button {
+  margin-left: 600px;
 }
