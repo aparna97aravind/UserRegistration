@@ -1,0 +1,33 @@
+<%- include('ejsPartials/header.ejs') %>
+<body>
+  <form action="/signup" method="POST" class="forms">
+  <h4>SIGN UP</h4>
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter your Name" id="username" name="username">
+      <br>
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter your password" id="password" name="password">
+      <br>
+      <label for="email"><b>Email ID</b></label>
+      <input type="email" placeholder="Enter your Email ID" id="email" name="email">
+      <br>
+      <button type="submit" class="submit">SUBMIT</button>
+  </form>
+
+  <h5>PLEASE ENTER VALID CREDENTIALS</h5>
+  <% if(typeof alerts != 'undefined') {%>
+    <% errarray.forEach(function(error){ %>
+        <div class="errormsg" role="alert">
+            <%= error.msg %>
+          </div>
+        <% }) %>
+  <% } %>
+
+  <% if (alerts === 'Duplications') { %>
+    <div class="errormsg" role="alert">
+      <p>Email ID Already Exist! Try Again</p>
+    </div>
+  <% } %>
+
+</body>
+<%- include('ejsPartials/footer.ejs') %>
