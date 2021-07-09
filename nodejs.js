@@ -47,8 +47,6 @@ app.post('/signup', [
     const { email, username, password } = req.body;
     connection.query('SELECT email FROM CustomerList WHERE email = ?', [email], // checking for similar Email id in DB
       (err, result) => {
-        console.log(result);
-        console.log(err);
         if (err) {
           res.send('Something went wrong here');
         }
@@ -81,7 +79,7 @@ app.post('/logindone', (req, res) => {
       res.send('Something went wrong,try after sometime');
     } else {
       if (output.length === 0) { // empty array
-        res.render('loginpage', { flag: 0, message: 'User doesnot exist! Try another Email ID or Sign Up' });
+        return res.render('loginpage', { flag: 0, message: 'User doesnot exist! Try another Email ID or Sign Up' });
       }
       if (output[0].password === req.body.password) { // password matches
         res.render('done');
